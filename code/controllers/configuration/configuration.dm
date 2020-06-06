@@ -17,8 +17,8 @@
 	var/list/mode_names
 	var/list/mode_reports
 	var/list/mode_false_report_weight
-	var/motd
 
+	var/motd
 
 /datum/controller/configuration/proc/Load(_directory)
 	if(_directory)

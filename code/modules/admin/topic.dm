@@ -2476,8 +2476,6 @@
 /datum/admins/proc/makeMentor(ckey)
 	if(!check_rights(R_PERMISSIONS))
 		return
-	if (!check_rights(0))
-		return
 	if(!ckey)
 		return
 	var/client/C = GLOB.directory[ckey]
@@ -2505,8 +2503,6 @@
 
 /datum/admins/proc/removeMentor(ckey)
 	if(!check_rights(R_PERMISSIONS))
-		return
-	if (!check_rights(0))
 		return
 	if(!ckey)
 		return
