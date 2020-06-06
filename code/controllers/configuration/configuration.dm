@@ -19,8 +19,6 @@
 	var/list/mode_false_report_weight
 	var/motd
 
-	var/mentors_mobname_only = 0		// Only display mob name to mentors in mentorhelps
-	var/mentor_legacy_system = 0		// Whether to use the legacy mentor system (flat file) instead of SQL
 
 /datum/controller/configuration/proc/Load(_directory)
 	if(_directory)

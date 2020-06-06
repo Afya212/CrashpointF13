@@ -129,10 +129,10 @@
 
 		if("mentor_log")
 			var/dat = "<B>Mentor Log<HR></B>"
-			for(var/l in GLOB.mentorlog)
+			for(var/l in GLOB.mentor_log)
 				dat += "<li>[l]</li>"
 
-			if(!GLOB.mentorlog.len)
+			if(!GLOB.mentor_log.len)
 				dat += "No mentors have done anything this round!"
 			usr << browse(dat, "window=mentor_log")
 

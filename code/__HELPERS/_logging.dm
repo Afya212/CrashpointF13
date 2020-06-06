@@ -52,8 +52,8 @@
 		WRITE_LOG(GLOB.world_game_log, "[time_stamp()] ADMIN: DSAY: [text]")
 
 /proc/log_mentor(text)
+	GLOB.mentor_log.Add("[time_stamp()] [text]")
 	if (CONFIG_GET(flag/log_mentor))
-		GLOB.mentorlog.Add(text)
 		WRITE_LOG(GLOB.world_game_log, "[time_stamp()] MENTOR: [text]")
 
 /* All other items are public. */

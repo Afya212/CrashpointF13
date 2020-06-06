@@ -6,13 +6,16 @@
 		mentor_datum.following = M
 		usr.reset_perspective(M)
 		verbs += /client/proc/mentor_unfollow
-		to_chat(usr, "<span class='info'>Click the <a href='?_src_=mentor;mentor_unfollow=[REF(M)];[MentorHrefToken(TRUE)]'>\"Stop Following\"</a> button here or in the Mentor tab to stop following [key_name(M)].</span>")
+		if(CONFIG_GET(flag/mentors_mobname_only))
+			to_chat(usr, "<span class='info'>Click the <a href='?_src_=mentor;mentor_unfollow=[REF(M)];[MentorHrefToken(TRUE)]'>\"Stop Following\"</a> button here or in the Mentor tab to stop following this person.</span>")
+		else
+			to_chat(usr, "<span class='info'>Click the <a href='?_src_=mentor;mentor_unfollow=[REF(M)];[MentorHrefToken(TRUE)]'>\"Stop Following\"</a> button here or in the Mentor tab to stop following [key_name(M)].</span>")
 		orbiting = FALSE
 	else
 		var/mob/dead/observer/O = usr
 		O.ManualFollow(M)
-	to_chat(GLOB.admins, "<span class='mentor'><span class='prefix'>MENTOR:</span> <EM>[key_name(usr)]</EM> is now [orbiting ? "orbiting" : "following"] <EM>[key_name(M)][key_name(M)][orbiting ? " as a ghost" : ""].</span>")
-	log_mentor("[key_name(usr)] [orbiting ? "is now orbiting" : "began following"][key_name(M)][orbiting ? " as a ghost" : ""].")
+	to_chat(GLOB.admins, "<span class='admin'><span class='prefix'>[time_stamp()] MENTOR LOG:</span> <EM>[key_name(usr)]</EM> is now [orbiting ? "orbiting" : "following"] <EM>[key_name(M)][orbiting ? " as a ghost" : ""].</span>")
+	log_mentor("[key_name(usr)] [orbiting ? "is now orbiting" : "began following "][key_name(M)][orbiting ? " as a ghost" : ""].")
 
 /client/proc/mentor_unfollow()
 	set category = "Mentor"
@@ -23,6 +26,6 @@
 		return
 	usr.reset_perspective()
 	verbs -= /client/proc/mentor_unfollow
-	to_chat(GLOB.admins, "<span class='mentor'><span class='prefix'>MENTOR:</span> <EM>[key_name(usr)]</EM> is no longer following <EM>[key_name(mentor_datum.following)].</span>")
+	to_chat(GLOB.admins, "<span class='adminnotice'><span class='prefix'>MENTOR LOG:</span> <EM>[key_name(usr)]</EM> is no longer following <EM>[key_name(mentor_datum.following)].</span>")
 	log_mentor("[key_name(usr)] stopped following [key_name(mentor_datum.following)].")
 	mentor_datum.following = null
