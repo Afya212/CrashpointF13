@@ -44,5 +44,7 @@ GLOBAL_LIST_EMPTY(LOOClog)
 GLOBAL_PROTECT(LOOClog)
 GLOBAL_LIST_EMPTY(adminlog)
 GLOBAL_PROTECT(adminlog)
+GLOBAL_LIST_EMPTY(mentorlog)
+GLOBAL_PROTECT(mentorlog)
 
 GLOBAL_LIST_EMPTY(active_turfs_startlist)

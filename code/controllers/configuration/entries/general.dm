@@ -49,6 +49,10 @@
 /datum/config_entry/flag/log_adminchat	// log admin chat messages
 	protection = CONFIG_ENTRY_LOCKED
 
+/datum/config_entry/flag/log_adminchat	// log admin chat messages
+
+datum/config_entry/flag/log_mentor	// log mentor messages
+
 /datum/config_entry/flag/log_pda	// log Pip-Boy 3000 messages
 
 /datum/config_entry/flag/log_twitter	// log certain expliotable parrots and other such fun things in a JSON file of twitter valid phrases.
@@ -136,6 +140,11 @@
 	protection = CONFIG_ENTRY_LOCKED
 
 /datum/config_entry/flag/load_legacy_ranks_only	//Loads admin ranks only from legacy admin_ranks.txt, while enabled ranks are mirrored to the database
+	protection = CONFIG_ENTRY_LOCKED
+
+/datum/config_entry/flag/mentors_mobname_only
+
+/datum/config_entry/flag/mentor_legacy_system	//Defines whether the server uses the legacy mentor system with mentors.txt or the SQL system
 	protection = CONFIG_ENTRY_LOCKED
 
 /datum/config_entry/string/hostedby

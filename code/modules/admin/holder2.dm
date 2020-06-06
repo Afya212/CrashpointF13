@@ -24,6 +24,8 @@ GLOBAL_PROTECT(href_token)
 	var/datum/newscaster/feed_channel/admincaster_feed_channel = new /datum/newscaster/feed_channel
 	var/admin_signature
 
+	var/following = null
+
 	var/href_token
 
 	var/deadmined
@@ -116,6 +118,9 @@ GLOBAL_PROTECT(href_token)
 		owner.verbs -= /client/proc/readmin
 		GLOB.admins |= C
 
+		if(istype(C))
+			C.mentor_datum_set(TRUE)
+
 /datum/admins/proc/disassociate()
 	if(IsAdminAdvancedProcCall())
 		var/msg = " has tried to elevate permissions!"
@@ -127,6 +132,8 @@ GLOBAL_PROTECT(href_token)
 		owner.remove_admin_verbs()
 		owner.holder = null
 		owner = null
+		owner.remove_mentor_verbs()
+		owner.mentor_datum = null
 
 /datum/admins/proc/check_for_rights(rights_required)
 	if(rights_required && !(rights_required & rank.rights))

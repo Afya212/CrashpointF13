@@ -10,6 +10,7 @@
 			<A href='?src=[REF(src)];[HrefToken()];secrets=list_job_debug'>Show Job Debug</A><BR>
 			<A href='?src=[REF(src)];[HrefToken()];secrets=admin_log'>Admin Log</A><BR>
 			<A href='?src=[REF(src)];[HrefToken()];secrets=show_admins'>Show Admin List</A><BR>
+			<A href='?src=[REF(src)];[HrefToken()];secrets=mentor_log'>Mentor Log</A><BR>
 			<BR>
 			"}
 
@@ -125,6 +126,15 @@
 					var/datum/admins/D = GLOB.admin_datums[ckey]
 					dat += "[ckey] - [D.rank.name]<br>"
 				usr << browse(dat, "window=showadmins;size=600x500")
+
+		if("mentor_log")
+			var/dat = "<B>Mentor Log<HR></B>"
+			for(var/l in GLOB.mentorlog)
+				dat += "<li>[l]</li>"
+
+			if(!GLOB.mentorlog.len)
+				dat += "No mentors have done anything this round!"
+			usr << browse(dat, "window=mentor_log")
 
 		if("tdomereset")
 			if(!check_rights(R_ADMIN))

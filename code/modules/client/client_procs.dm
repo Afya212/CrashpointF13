@@ -88,11 +88,35 @@ GLOBAL_LIST_INIT(blacklisted_builds, list(
 		cmd_admin_pm(href_list["priv_msg"],null)
 		return
 
+	if(href_list["mentor_msg"])
+		if(CONFIG_GET(flag/mentors_mobname_only))
+			var/mob/M = locate(href_list["mentor_msg"])
+			cmd_mentor_pm(M,null)
+		else
+			cmd_mentor_pm(href_list["mentor_msg"],null)
+		return TRUE
+
+	//Mentor Follow
+	if(href_list["mentor_follow"])
+		var/mob/living/M = locate(href_list["mentor_follow"])
+
+		if(istype(M))
+			mentor_follow(M)
+		return TRUE
+
+	if(href_list["mentor_unfollow"])
+		var/mob/living/M = locate(href_list["mentor_follow"])
+		if(M && mentor_datum.following == M)
+			mentor_unfollow()
+		return TRUE
+
 	switch(href_list["_src_"])
 		if("holder")
 			hsrc = holder
 		if("usr")
 			hsrc = mob
+		if("mentor")
+			hsrc = mentor_datum
 		if("prefs")
 			if (inprefs)
 				return
@@ -204,6 +228,7 @@ GLOBAL_LIST_EMPTY(external_rsc_urls)
 
 	GLOB.clients += src
 	GLOB.directory[ckey] = src
+	mentor_datum_set()
 
 	GLOB.ahelp_tickets.ClientLogin(src)
 	var/connecting_admin = FALSE //because de-admined admins connecting should be treated like admins.
@@ -864,3 +889,22 @@ GLOBAL_LIST_EMPTY(external_rsc_urls)
 /client/proc/AnnouncePR(announcement)
 	if(prefs && prefs.chat_toggles & CHAT_PULLR)
 		to_chat(src, announcement)
+
+//////////////
+////MENTORS///
+//////////////
+
+/client/proc/mentor_datum_set(admin)
+	mentor_datum = GLOB.mentor_datums[ckey]
+	if(!mentor_datum && check_rights_for(src, R_ADMIN,0))
+		new /datum/mentors(ckey)
+	if(mentor_datum)
+		if(!check_rights_for(src, R_ADMIN,0) && !admin)
+			GLOB.mentors |= src // don't add admins to this list too.
+		mentor_datum.owner = src
+		add_mentor_verbs()
+		mentor_memo_output("Show")
+
+/client/proc/is_mentor() // admins are mentors too.
+	if(mentor_datum || check_rights_for(src, R_ADMIN,0))
+		return TRUE
