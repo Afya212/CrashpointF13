@@ -198,7 +198,7 @@ GLOBAL_PROTECT(protected_ranks)
 	testing(msg)
 	#endif
 
-/proc/load_admins(no_update)
+/proc/load_admins(no_update) // Test
 	var/dbfail
 	if(!CONFIG_GET(flag/admin_legacy_system) && !SSdbcore.Connect())
 		message_admins("Failed to connect to database while loading admins. Loading from backup.")
