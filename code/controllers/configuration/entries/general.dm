@@ -49,8 +49,6 @@
 /datum/config_entry/flag/log_adminchat	// log admin chat messages
 	protection = CONFIG_ENTRY_LOCKED
 
-/datum/config_entry/flag/log_adminchat	// log admin chat messages
-
 datum/config_entry/flag/log_mentor	// log mentor messages
 
 /datum/config_entry/flag/log_pda	// log Pip-Boy 3000 messages
