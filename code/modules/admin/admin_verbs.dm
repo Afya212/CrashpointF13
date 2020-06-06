@@ -130,6 +130,7 @@ GLOBAL_PROTECT(admin_verbs_server)
 	/client/proc/toggle_random_events,
 	/client/proc/reestablish_db_connection, /*reattempt a connection to the database*/
 	/client/proc/reload_admins,
+	/client/proc/reload_mentors,
 	/client/proc/forcerandomrotate,
 	/client/proc/adminchangemap,
 	/client/proc/panicbunker,
@@ -191,6 +192,7 @@ GLOBAL_LIST_INIT(admin_verbs_hideable, list(
 	/client/proc/reestablish_db_connection,
 	/client/proc/cmd_admin_check_contents,
 	/client/proc/reload_admins,
+	/client/proc/reload_mentors,
 	/client/proc/edit_admin_permissions,
 	/proc/possess,
 	/proc/release,
