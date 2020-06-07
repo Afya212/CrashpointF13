@@ -10,10 +10,10 @@ if grep -El '^\".+\" = \(.+\)' _maps/**/*.dmm;	then
     echo "Non-TGM formatted map detected. Please convert it using Map Merger!"
     st=1
 fi;
-#if grep -P '^\ttag = \"icon' _maps/**/*.dmm;	then
-#    echo "tag vars from icon state generation detected in maps, please remove them."
-#    st=1
-#fi;
+if grep -P '^\ttag = \"icon' _maps/**/*.dmm;	then
+    echo "tag vars from icon state generation detected in maps, please remove them."
+    st=1
+fi;
 if grep 'step_[xy]' _maps/**/*.dmm;	then
     echo "step_x/step_y variables detected in maps, please remove them."
     st=1
